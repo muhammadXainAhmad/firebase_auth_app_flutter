@@ -1,5 +1,6 @@
 import 'package:firebase_auth_app/firebase_options.dart';
-import 'package:firebase_auth_app/home.dart';
+import 'package:firebase_auth_app/login_page.dart';
+import 'package:firebase_auth_app/signup_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -21,7 +22,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(),
+      routes: {
+        "login": (context) => const MyLoginPage(),
+        "signup": (context) => const MySignUpPage(),
+      },
+      home: const MyLoginPage(),
     );
   }
 }

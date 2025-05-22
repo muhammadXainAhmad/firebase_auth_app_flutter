@@ -28,7 +28,18 @@ class MyApp extends StatelessWidget {
         "login": (context) => const MyLoginPage(),
         "signup": (context) => const MySignUpPage(),
       },
-      home: MySignUpPage()
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.data != null) {
+            return const MyHomePage();
+          }
+          return const MyLoginPage();
+        },
+      ),
     );
   }
 }

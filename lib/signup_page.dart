@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MySignUpPage extends StatefulWidget {
@@ -8,12 +10,41 @@ class MySignUpPage extends StatefulWidget {
 }
 
 class _MySignUpPageState extends State<MySignUpPage> {
-  final myBorder = OutlineInputBorder(
+  final eBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(color: Colors.grey, width: 1.5),
+  );
+  final fBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10),
     borderSide: BorderSide(color: Colors.black, width: 1.5),
   );
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> createUserWithEmailAndPassword() async {
+    try {
+      final userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
+          );
+      if (kDebugMode) {
+        print(userCredential);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (kDebugMode) {
+        print(e.message);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +72,8 @@ class _MySignUpPageState extends State<MySignUpPage> {
                 decoration: InputDecoration(
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: myBorder,
-                  focusedBorder: myBorder,
+                  enabledBorder: eBorder,
+                  focusedBorder: fBorder,
                 ),
               ),
             ),
@@ -55,11 +86,12 @@ class _MySignUpPageState extends State<MySignUpPage> {
               ),
               child: TextField(
                 controller: passwordController,
+                obscureText: true,
                 decoration: InputDecoration(
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: myBorder,
-                  focusedBorder: myBorder,
+                  enabledBorder: eBorder,
+                  focusedBorder: fBorder,
                 ),
               ),
             ),
@@ -71,7 +103,9 @@ class _MySignUpPageState extends State<MySignUpPage> {
                 bottom: 8,
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await createUserWithEmailAndPassword();
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
                   shape: RoundedRectangleBorder(

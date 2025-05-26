@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_app/firebase_options.dart';
+import 'package:firebase_auth_app/forgot_page.dart';
 import 'package:firebase_auth_app/home_page.dart';
 import 'package:firebase_auth_app/login_page.dart';
 import 'package:firebase_auth_app/signup_page.dart';
@@ -27,12 +28,15 @@ class MyApp extends StatelessWidget {
       routes: {
         "login": (context) => const MyLoginPage(),
         "signup": (context) => const MySignUpPage(),
+        "forgot": (context) => const MyForgotPage(),
       },
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Scaffold(
+              body: const Center(child: CircularProgressIndicator()),
+            );
           }
           if (snapshot.data != null) {
             return const MyHomePage();

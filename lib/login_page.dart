@@ -90,12 +90,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: 8,
-                bottom: 8,
-              ),
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
               child: TextField(
                 obscureText: true,
                 controller: passwordController,
@@ -110,12 +105,19 @@ class _MyLoginPageState extends State<MyLoginPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: 8,
-                bottom: 8,
+              padding: const EdgeInsets.only(right: 16),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("forgot");
+                  },
+                  child: Text("Forgot Password?"),
+                ),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
               child: ElevatedButton(
                 onPressed: () async {
                   await loginUserWithEmailAndPassword();

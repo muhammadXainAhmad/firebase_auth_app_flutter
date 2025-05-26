@@ -42,7 +42,10 @@ class _MyLoginPageState extends State<MyLoginPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Incorrect email or password!"),
+            content: Text(
+              "Incorrect email or password!",
+              textAlign: TextAlign.center,
+            ),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(

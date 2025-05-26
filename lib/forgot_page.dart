@@ -34,7 +34,7 @@ class _MyForgotPageState extends State<MyForgotPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Reset link sent!"),
+            content: Text("Reset link sent!",textAlign: TextAlign.center,),
             backgroundColor: Colors.green,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -48,7 +48,7 @@ class _MyForgotPageState extends State<MyForgotPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Account does not exist!"),
+            content: Text("Account does not exist!",textAlign: TextAlign.center,),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(

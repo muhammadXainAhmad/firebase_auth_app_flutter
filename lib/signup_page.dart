@@ -41,7 +41,7 @@ class _MySignUpPageState extends State<MySignUpPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Account successfully created!"),
+            content: Text("Account successfully created!",textAlign: TextAlign.center,),
             backgroundColor: Colors.green,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(

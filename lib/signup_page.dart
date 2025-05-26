@@ -38,11 +38,25 @@ class _MySignUpPageState extends State<MySignUpPage> {
       if (kDebugMode) {
         print(userCredential);
       }
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Account successfully created!"),
+            backgroundColor: Colors.green,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        );
+      }
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
         print(e.message);
       }
     }
+    emailController.clear();
+    passwordController.clear();
   }
 
   @override

@@ -39,6 +39,18 @@ class _MyLoginPageState extends State<MyLoginPage> {
         print(userCredential);
       }
     } on FirebaseAuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Incorrect email or password!"),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        );
+      }
       if (kDebugMode) {
         print(e.message);
       }

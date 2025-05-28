@@ -1,3 +1,4 @@
+import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,14 +11,6 @@ class MyLoginPage extends StatefulWidget {
 }
 
 class _MyLoginPageState extends State<MyLoginPage> {
-  final eBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: Colors.grey, width: 1.5),
-  );
-  final fBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: Colors.black, width: 1.5),
-  );
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -87,8 +80,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 decoration: InputDecoration(
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: eBorder,
-                  focusedBorder: fBorder,
+                  enabledBorder: MyConstants().eBorder,
+                  focusedBorder: MyConstants().fBorder,
                 ),
               ),
             ),
@@ -102,8 +95,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
                   fillColor: Colors.white,
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: eBorder,
-                  focusedBorder: fBorder,
+                  enabledBorder: MyConstants().eBorder,
+                  focusedBorder: MyConstants().fBorder,
                 ),
               ),
             ),

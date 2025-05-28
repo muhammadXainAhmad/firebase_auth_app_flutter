@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -10,14 +11,6 @@ class MyForgotPage extends StatefulWidget {
 }
 
 class _MyForgotPageState extends State<MyForgotPage> {
-  final eBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: Colors.grey, width: 1.5),
-  );
-  final fBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: Colors.black, width: 1.5),
-  );
   final emailController = TextEditingController();
 
   @override
@@ -34,7 +27,7 @@ class _MyForgotPageState extends State<MyForgotPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Reset link sent!",textAlign: TextAlign.center,),
+            content: Text("Reset link sent!", textAlign: TextAlign.center),
             backgroundColor: Colors.green,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -44,11 +37,15 @@ class _MyForgotPageState extends State<MyForgotPage> {
         );
       }
       emailController.clear();
+      Navigator.of(context).pushNamed("login");
     } on FirebaseAuthException catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Account does not exist!",textAlign: TextAlign.center,),
+            content: Text(
+              "Account does not exist!",
+              textAlign: TextAlign.center,
+            ),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -91,8 +88,8 @@ class _MyForgotPageState extends State<MyForgotPage> {
                 decoration: InputDecoration(
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: eBorder,
-                  focusedBorder: fBorder,
+                  enabledBorder: MyConstants().eBorder,
+                  focusedBorder: MyConstants().fBorder,
                 ),
               ),
             ),

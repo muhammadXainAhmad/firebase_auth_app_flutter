@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_app/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -10,14 +11,6 @@ class MySignUpPage extends StatefulWidget {
 }
 
 class _MySignUpPageState extends State<MySignUpPage> {
-  final eBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: Colors.grey, width: 1.5),
-  );
-  final fBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: Colors.black, width: 1.5),
-  );
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -41,7 +34,10 @@ class _MySignUpPageState extends State<MySignUpPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Account successfully created!",textAlign: TextAlign.center,),
+            content: Text(
+              "Account successfully created!",
+              textAlign: TextAlign.center,
+            ),
             backgroundColor: Colors.green,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -86,8 +82,8 @@ class _MySignUpPageState extends State<MySignUpPage> {
                 decoration: InputDecoration(
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: eBorder,
-                  focusedBorder: fBorder,
+                  enabledBorder: MyConstants().eBorder,
+                  focusedBorder: MyConstants().fBorder,
                 ),
               ),
             ),
@@ -104,8 +100,8 @@ class _MySignUpPageState extends State<MySignUpPage> {
                 decoration: InputDecoration(
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: eBorder,
-                  focusedBorder: fBorder,
+                  enabledBorder: MyConstants().eBorder,
+                  focusedBorder: MyConstants().fBorder,
                 ),
               ),
             ),

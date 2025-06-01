@@ -19,7 +19,8 @@ class MyHomePage extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
-        ),centerTitle: true,
+        ),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
@@ -45,6 +46,7 @@ class MyHomePage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   await signOut();
+                  Navigator.of(context).pushReplacementNamed("login");
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,

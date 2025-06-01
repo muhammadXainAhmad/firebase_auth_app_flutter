@@ -37,6 +37,7 @@ class _MyPhoneSignInState extends State<MyPhoneSignIn> {
             );
             await FirebaseAuth.instance.signInWithCredential(credential);
             Navigator.of(context).pop();
+            Navigator.of(context).pushReplacementNamed("home");
           },
         );
       },

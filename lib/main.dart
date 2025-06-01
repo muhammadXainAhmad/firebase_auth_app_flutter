@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_app/phone_login_page.dart';
 import 'package:firebase_auth_app/firebase_options.dart';
 import 'package:firebase_auth_app/forgot_page.dart';
 import 'package:firebase_auth_app/home_page.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         "forgot": (context) => const MyForgotPage(),
         "home": (context) => const MyHomePage(),
         "verification": (context) => const MyVerificationPage(),
+        "phone": (context) => const MyPhoneSignIn(),
       },
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -46,14 +48,25 @@ class MyApp extends StatelessWidget {
               body: const Center(child: CircularProgressIndicator()),
             );
           }
-          if (snapshot.data != null) {
-            if (snapshot.data!.emailVerified) {
+          final user = snapshot.data;
+
+          if (user != null) {
+            final provider =
+                user.providerData.isNotEmpty
+                    ? user.providerData[0].providerId
+                    : null;
+
+            if (provider == 'password') {
+              return user.emailVerified
+                  ? const MyHomePage()
+                  : const MyVerificationPage();
+            } else if (provider == 'phone') {
               return const MyHomePage();
             } else {
-              return const MyVerificationPage();
+              return const MyHomePage();
             }
           } else {
-            return MyLoginPage();
+            return const MyLoginPage();
           }
         },
       ),

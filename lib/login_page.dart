@@ -138,6 +138,17 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 child: Text("SIGN IN", style: TextStyle(color: Colors.white)),
               ),
             ),
+            Divider(
+              height: 50,
+              indent: 100,
+              endIndent: 100,
+              color: Colors.black,
+              thickness: 1.25,
+            ),
+            IconButton(
+              onPressed: () => Navigator.of(context).pushNamed("phone"),
+              icon: Icon(Icons.phone_android_rounded, size: 28),
+            ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamed("signup");

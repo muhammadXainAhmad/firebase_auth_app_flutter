@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth_app/show_otp_dialog.dart';
-import 'package:firebase_auth_app/constants.dart';
+import 'package:firebase_auth_app/Views/show_otp_dialog.dart';
+import 'package:firebase_auth_app/Utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

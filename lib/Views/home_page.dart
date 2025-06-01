@@ -11,6 +11,16 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Hello, ${FirebaseAuth.instance.currentUser!.email ?? FirebaseAuth.instance.currentUser!.phoneNumber}",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),centerTitle: true,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -23,7 +33,8 @@ class MyHomePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(Icons.home, size: 100, color: Colors.black),
+
+            Icon(Icons.home, size: 300, color: Colors.black),
             Padding(
               padding: const EdgeInsets.only(
                 left: 16,

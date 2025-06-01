@@ -1,16 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth_app/constants.dart';
+import 'package:firebase_auth_app/Utils/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class MySignUpPage extends StatefulWidget {
-  const MySignUpPage({super.key});
+class MyLoginPage extends StatefulWidget {
+  const MyLoginPage({super.key});
 
   @override
-  State<MySignUpPage> createState() => _MySignUpPageState();
+  State<MyLoginPage> createState() => _MyLoginPageState();
 }
 
-class _MySignUpPageState extends State<MySignUpPage> {
+class _MyLoginPageState extends State<MyLoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -21,39 +21,46 @@ class _MySignUpPageState extends State<MySignUpPage> {
     super.dispose();
   }
 
-  Future<void> createUserWithEmailAndPassword() async {
+  Future<void> loginUserWithEmailAndPassword() async {
     try {
       final userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
+          .signInWithEmailAndPassword(
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
           );
       if (kDebugMode) {
         print(userCredential);
       }
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null && user.emailVerified) {
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed("home");
+        }
+      } else {
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed("verification");
+        }
+      }
+    } on FirebaseAuthException catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              "Account successfully created!",
+              "Incorrect email or password!",
               textAlign: TextAlign.center,
             ),
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
           ),
         );
-        Navigator.of(context).pushReplacementNamed("verification");
       }
-    } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
         print(e.message);
       }
     }
-    emailController.clear();
-    passwordController.clear();
   }
 
   @override
@@ -64,7 +71,7 @@ class _MySignUpPageState extends State<MySignUpPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Sign Up.",
+              "Sign In.",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 32,
@@ -89,16 +96,13 @@ class _MySignUpPageState extends State<MySignUpPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: 8,
-                bottom: 8,
-              ),
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
               child: TextField(
-                controller: passwordController,
                 obscureText: true,
+                controller: passwordController,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.black),
                   enabledBorder: MyConstants().eBorder,
@@ -107,15 +111,22 @@ class _MySignUpPageState extends State<MySignUpPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: 8,
-                bottom: 8,
+              padding: const EdgeInsets.only(right: 16),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed("forgot");
+                  },
+                  child: Text("Forgot Password?"),
+                ),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
               child: ElevatedButton(
                 onPressed: () async {
-                  await createUserWithEmailAndPassword();
+                  await loginUserWithEmailAndPassword();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
@@ -124,15 +135,26 @@ class _MySignUpPageState extends State<MySignUpPage> {
                   ),
                   minimumSize: Size(double.infinity, 50),
                 ),
-                child: Text("SIGN UP", style: TextStyle(color: Colors.white)),
+                child: Text("SIGN IN", style: TextStyle(color: Colors.white)),
               ),
+            ),
+            Divider(
+              height: 50,
+              indent: 100,
+              endIndent: 100,
+              color: Colors.black,
+              thickness: 1.25,
+            ),
+            IconButton(
+              onPressed: () => Navigator.of(context).pushNamed("phone"),
+              icon: Icon(Icons.phone_android_rounded, size: 28),
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushNamed("login");
+                Navigator.of(context).pushNamed("signup");
               },
               child: Text(
-                "Already have an account?",
+                "Dont have an account?",
                 style: TextStyle(color: Colors.black, fontSize: 16),
               ),
             ),

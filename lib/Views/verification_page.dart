@@ -1,4 +1,4 @@
-import 'package:firebase_auth_app/firebase_methods.dart';
+import 'package:firebase_auth_app/Utils/firebase_methods.dart';
 import 'package:flutter/material.dart';
 
 class MyVerificationPage extends StatefulWidget {

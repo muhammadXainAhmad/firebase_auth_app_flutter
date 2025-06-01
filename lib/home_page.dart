@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  Future<void> signOut()async{
+  Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 
@@ -33,7 +33,7 @@ class MyHomePage extends StatelessWidget {
               ),
               child: ElevatedButton(
                 onPressed: () async {
-                 signOut();
+                  await signOut();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,

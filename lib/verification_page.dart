@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_app/firebase_methods.dart';
 import 'package:flutter/material.dart';
 
 class MyVerificationPage extends StatefulWidget {
@@ -9,48 +9,9 @@ class MyVerificationPage extends StatefulWidget {
 }
 
 class _MyVerificationPageState extends State<MyVerificationPage> {
-  Future<void> sendVerificationEmail() async {
-    try {
-      await FirebaseAuth.instance.currentUser!.sendEmailVerification();
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              "Email verfication sent!",
-              textAlign: TextAlign.center,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            backgroundColor: Colors.green,
-          ),
-        );
-      }
-    } on FirebaseAuthException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              e.message ?? "An unexpected error occurred",
-              textAlign: TextAlign.center,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            backgroundColor: Colors.green,
-          ),
-        );
-      }
-    }
-  }
-
-  Future<void> reloadVerification() async {
-    await FirebaseAuth.instance.currentUser!.reload();
-  }
-
   @override
   void initState() {
-    sendVerificationEmail();
+    FirebaseMethods().sendVerificationEmail(context);
     super.initState();
   }
 
@@ -58,7 +19,9 @@ class _MyVerificationPageState extends State<MyVerificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => reloadVerification(),
+        onPressed: () {
+          FirebaseMethods().reloadVerification(context);
+        },
         child: Icon(Icons.replay_rounded),
       ),
       body: Center(

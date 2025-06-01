@@ -6,6 +6,7 @@ import 'package:firebase_auth_app/login_page.dart';
 import 'package:firebase_auth_app/signup_page.dart';
 import 'package:firebase_auth_app/verification_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -30,10 +31,16 @@ class MyApp extends StatelessWidget {
         "login": (context) => const MyLoginPage(),
         "signup": (context) => const MySignUpPage(),
         "forgot": (context) => const MyForgotPage(),
+        "home": (context) => const MyHomePage(),
+        "verification": (context) => const MyVerificationPage(),
       },
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
+          if (kDebugMode) {
+            print("AuthStateChanges snapshot: ${snapshot.data}");
+          }
+
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Scaffold(
               body: const Center(child: CircularProgressIndicator()),
@@ -45,8 +52,9 @@ class MyApp extends StatelessWidget {
             } else {
               return const MyVerificationPage();
             }
+          } else {
+            return MyLoginPage();
           }
-          return const MyLoginPage();
         },
       ),
     );

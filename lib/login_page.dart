@@ -31,6 +31,16 @@ class _MyLoginPageState extends State<MyLoginPage> {
       if (kDebugMode) {
         print(userCredential);
       }
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null && user.emailVerified) {
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed("home");
+        }
+      } else {
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed("verification");
+        }
+      }
     } on FirebaseAuthException catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

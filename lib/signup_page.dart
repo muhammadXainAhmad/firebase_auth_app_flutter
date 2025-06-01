@@ -45,6 +45,7 @@ class _MySignUpPageState extends State<MySignUpPage> {
             ),
           ),
         );
+        Navigator.of(context).pushReplacementNamed("verification");
       }
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {

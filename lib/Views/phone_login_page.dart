@@ -22,22 +22,50 @@ class _MyPhoneSignInState extends State<MyPhoneSignIn> {
         await FirebaseAuth.instance.signInWithCredential(credential);
       },
       verificationFailed: (error) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("data")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.message!, textAlign: TextAlign.center),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        );
       },
       codeSent: (verificationId, forceResendingToken) async {
         showOTPDialog(
           context: context,
           codeController: codeController,
           onPressed: () async {
-            PhoneAuthCredential credential = PhoneAuthProvider.credential(
-              verificationId: verificationId,
-              smsCode: codeController.text.trim(),
-            );
-            await FirebaseAuth.instance.signInWithCredential(credential);
-            Navigator.of(context).pop();
-            Navigator.of(context).pushReplacementNamed("home");
+            try {
+              PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                verificationId: verificationId,
+                smsCode: codeController.text.trim(),
+              );
+              await FirebaseAuth.instance.signInWithCredential(credential);
+              if (mounted) {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed("home");
+              }
+            } on FirebaseAuthException catch (e) {
+              if (mounted) {
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      e.message ?? "Invalid OTP",
+                      textAlign: TextAlign.center,
+                    ),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                );
+              }
+            }
           },
         );
       },

@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   Future<void> signOut() async {
+    await GoogleSignIn().signOut();
     await FirebaseAuth.instance.signOut();
   }
 
@@ -46,7 +48,9 @@ class MyHomePage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   await signOut();
-                  Navigator.of(context).pushReplacementNamed("login");
+                  if (context.mounted) {
+                    Navigator.of(context).pushReplacementNamed("login");
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,

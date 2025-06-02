@@ -22,16 +22,7 @@ class _MyPhoneSignInState extends State<MyPhoneSignIn> {
         await FirebaseAuth.instance.signInWithCredential(credential);
       },
       verificationFailed: (error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(error.message!, textAlign: TextAlign.center),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        );
+        showSnack(context, error.message!, Colors.red);
       },
       codeSent: (verificationId, forceResendingToken) async {
         showOTPDialog(
@@ -51,19 +42,7 @@ class _MyPhoneSignInState extends State<MyPhoneSignIn> {
             } on FirebaseAuthException catch (e) {
               if (mounted) {
                 Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      e.message ?? "Invalid OTP",
-                      textAlign: TextAlign.center,
-                    ),
-                    backgroundColor: Colors.red,
-                    behavior: SnackBarBehavior.floating,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                );
+                showSnack(context, e.message ?? "Invalid OTP", Colors.red);
               }
             }
           },
@@ -106,8 +85,8 @@ class _MyPhoneSignInState extends State<MyPhoneSignIn> {
                   fillColor: Colors.white,
                   hintText: "Phone Number",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: MyConstants().eBorder,
-                  focusedBorder: MyConstants().fBorder,
+                  enabledBorder: MyConstants.eBorder,
+                  focusedBorder: MyConstants.fBorder,
                 ),
               ),
             ),

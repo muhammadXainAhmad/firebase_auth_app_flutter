@@ -29,8 +29,8 @@ void showOTPDialog({
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    enabledBorder: MyConstants().eBorder,
-                    focusedBorder: MyConstants().fBorder,
+                    enabledBorder: MyConstants.eBorder,
+                    focusedBorder: MyConstants.fBorder,
                   ),
                 ),
               ),

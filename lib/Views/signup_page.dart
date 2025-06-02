@@ -32,19 +32,7 @@ class _MySignUpPageState extends State<MySignUpPage> {
         print(userCredential);
       }
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              "Account successfully created!",
-              textAlign: TextAlign.center,
-            ),
-            backgroundColor: Colors.green,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        );
+        showSnack(context, "Account successfully created!", Colors.green);
         Navigator.of(context).pushReplacementNamed("verification");
       }
     } on FirebaseAuthException catch (e) {
@@ -52,19 +40,7 @@ class _MySignUpPageState extends State<MySignUpPage> {
         print(e.message);
       }
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              "Incorrect email or password!",
-              textAlign: TextAlign.center,
-            ),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        );
+        showSnack(context, "Incorrect email or password!", Colors.red);
       }
     }
     emailController.clear();
@@ -100,8 +76,8 @@ class _MySignUpPageState extends State<MySignUpPage> {
                   fillColor: Colors.white,
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: MyConstants().eBorder,
-                  focusedBorder: MyConstants().fBorder,
+                  enabledBorder: MyConstants.eBorder,
+                  focusedBorder: MyConstants.fBorder,
                 ),
               ),
             ),
@@ -120,8 +96,8 @@ class _MySignUpPageState extends State<MySignUpPage> {
                   fillColor: Colors.white,
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: MyConstants().eBorder,
-                  focusedBorder: MyConstants().fBorder,
+                  enabledBorder: MyConstants.eBorder,
+                  focusedBorder: MyConstants.fBorder,
                 ),
               ),
             ),

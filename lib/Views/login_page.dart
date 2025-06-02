@@ -44,19 +44,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
       }
     } on FirebaseAuthException catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              "Incorrect email or password!",
-              textAlign: TextAlign.center,
-            ),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        );
+        showSnack(context, "Incorrect email or password!", Colors.red);
       }
       if (kDebugMode) {
         print(e.message);
@@ -93,8 +81,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
                   fillColor: Colors.white,
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: MyConstants().eBorder,
-                  focusedBorder: MyConstants().fBorder,
+                  enabledBorder: MyConstants.eBorder,
+                  focusedBorder: MyConstants.fBorder,
                 ),
               ),
             ),
@@ -108,8 +96,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
                   fillColor: Colors.white,
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: MyConstants().eBorder,
-                  focusedBorder: MyConstants().fBorder,
+                  enabledBorder: MyConstants.eBorder,
+                  focusedBorder: MyConstants.fBorder,
                 ),
               ),
             ),

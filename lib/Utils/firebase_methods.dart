@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_app/Utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -19,16 +20,9 @@ class FirebaseMethods {
         await _auth.signInWithCredential(credential);
       }
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.message!, textAlign: TextAlign.center),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
-      );
+      if (context.mounted) {
+        showSnack(context, e.message!, Colors.red);
+      }
     }
   }
 
@@ -36,30 +30,17 @@ class FirebaseMethods {
   Future<void> sendVerificationEmail(BuildContext context) async {
     try {
       await _auth.currentUser!.sendEmailVerification();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Email verfication sent!", textAlign: TextAlign.center),
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          backgroundColor: Colors.green,
-        ),
-      );
+      if (context.mounted) {
+        showSnack(context, "Email verfication sent!", Colors.green);
+      }
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            e.message ?? "An unexpected error occurred",
-            textAlign: TextAlign.center,
-          ),
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          backgroundColor: Colors.red,
-        ),
-      );
+      if (context.mounted) {
+        showSnack(
+          context,
+          e.message ?? "An unexpected error occurred",
+          Colors.red,
+        );
+      }
     }
   }
 
@@ -69,22 +50,18 @@ class FirebaseMethods {
       final user = _auth.currentUser;
 
       if (user != null && user.emailVerified) {
-        Navigator.of(context).pushReplacementNamed("login");
+        if (context.mounted) {
+          Navigator.of(context).pushReplacementNamed("login");
+        }
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Email not verified yet."),
-            backgroundColor: Colors.red,
-          ),
-        );
+        if (context.mounted) {
+          showSnack(context, "Email not verified yet.", Colors.red);
+        }
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Failed to check verification status."),
-          backgroundColor: Colors.red,
-        ),
-      );
+      if (context.mounted) {
+        showSnack(context, "Failed to check verification status.", Colors.red);
+      }
     }
   }
 }

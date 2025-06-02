@@ -25,16 +25,7 @@ class _MyForgotPageState extends State<MyForgotPage> {
         email: emailController.text.trim(),
       );
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Reset link sent!", textAlign: TextAlign.center),
-            backgroundColor: Colors.green,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        );
+        showSnack(context, "Reset link sent!", Colors.green);
       }
       emailController.clear();
       if (mounted) {
@@ -42,19 +33,7 @@ class _MyForgotPageState extends State<MyForgotPage> {
       }
     } on FirebaseAuthException catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              "Account does not exist!",
-              textAlign: TextAlign.center,
-            ),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        );
+        showSnack(context, "Account does not exist!", Colors.red);
         if (kDebugMode) {
           print(e.message);
         }
@@ -90,8 +69,8 @@ class _MyForgotPageState extends State<MyForgotPage> {
                 decoration: InputDecoration(
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.black),
-                  enabledBorder: MyConstants().eBorder,
-                  focusedBorder: MyConstants().fBorder,
+                  enabledBorder: MyConstants.eBorder,
+                  focusedBorder: MyConstants.fBorder,
                 ),
               ),
             ),

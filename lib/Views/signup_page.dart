@@ -54,7 +54,10 @@ class _MySignUpPageState extends State<MySignUpPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Incorrect email or password!", textAlign: TextAlign.center),
+            content: Text(
+              "Incorrect email or password!",
+              textAlign: TextAlign.center,
+            ),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -93,6 +96,8 @@ class _MySignUpPageState extends State<MySignUpPage> {
               child: TextField(
                 controller: emailController,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.black),
                   enabledBorder: MyConstants().eBorder,
@@ -111,6 +116,8 @@ class _MySignUpPageState extends State<MySignUpPage> {
                 controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
                   hintText: "Password",
                   hintStyle: TextStyle(color: Colors.black),
                   enabledBorder: MyConstants().eBorder,

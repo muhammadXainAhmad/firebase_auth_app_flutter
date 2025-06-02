@@ -37,7 +37,9 @@ class _MyForgotPageState extends State<MyForgotPage> {
         );
       }
       emailController.clear();
-      Navigator.of(context).pushNamed("login");
+      if (mounted) {
+        Navigator.of(context).pushNamed("login");
+      }
     } on FirebaseAuthException catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

@@ -1,4 +1,5 @@
 import 'package:firebase_auth_app/Utils/constants.dart';
+import 'package:firebase_auth_app/Utils/firebase_methods.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -88,6 +89,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
               child: TextField(
                 controller: emailController,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.black),
                   enabledBorder: MyConstants().eBorder,
@@ -138,6 +141,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 child: Text("SIGN IN", style: TextStyle(color: Colors.white)),
               ),
             ),
+
             Divider(
               height: 50,
               indent: 100,
@@ -145,9 +149,25 @@ class _MyLoginPageState extends State<MyLoginPage> {
               color: Colors.black,
               thickness: 1.25,
             ),
-            IconButton(
-              onPressed: () => Navigator.of(context).pushNamed("phone"),
-              icon: Icon(Icons.phone_android_rounded, size: 28),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.of(context).pushNamed("phone"),
+                  icon: Icon(Icons.phone_android_rounded, size: 35),
+                ),
+                InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {
+                    FirebaseMethods().googleSignIn(context);
+                  },
+                  child: Image.asset(
+                    "assets/googleIcon.png",
+                    height: 36,
+                    width: 36,
+                  ),
+                ),
+              ],
             ),
             TextButton(
               onPressed: () {

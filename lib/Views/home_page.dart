@@ -4,7 +4,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
-
   Future<void> signOut() async {
     await GoogleSignIn().signOut();
     await FirebaseAuth.instance.signOut();
@@ -12,10 +11,17 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    final userDisplay =
+        user?.email != null
+            ? user!.email
+            : user?.phoneNumber != null
+            ? user!.phoneNumber
+            : "Anonymous User";
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Hello, ${FirebaseAuth.instance.currentUser!.email ?? FirebaseAuth.instance.currentUser!.phoneNumber}",
+          "Hello, $userDisplay",
           style: TextStyle(
             color: Colors.black,
             fontSize: 16,

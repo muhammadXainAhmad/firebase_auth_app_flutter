@@ -44,6 +44,7 @@ class FirebaseMethods {
     }
   }
 
+  // IS EMAIL VERIFIED?
   Future<void> reloadVerification(BuildContext context) async {
     try {
       await _auth.currentUser?.reload();
@@ -61,6 +62,20 @@ class FirebaseMethods {
     } catch (e) {
       if (context.mounted) {
         showSnack(context, "Failed to check verification status.", Colors.red);
+      }
+    }
+  }
+
+  //ANONYMOUS SIGN IN
+  Future<void> anonymousSignIn(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signInAnonymously();
+      if (context.mounted) {
+        Navigator.of(context).pushReplacementNamed("home");
+      }
+    } on FirebaseAuthException catch (e) {
+      if (context.mounted) {
+        showSnack(context, e.message!, Colors.red);
       }
     }
   }

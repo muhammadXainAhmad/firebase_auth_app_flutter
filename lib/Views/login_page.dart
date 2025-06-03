@@ -140,10 +140,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                  onPressed: () => Navigator.of(context).pushNamed("phone"),
-                  icon: Icon(Icons.phone_android_rounded, size: 35),
-                ),
                 InkWell(
                   borderRadius: BorderRadius.circular(20),
                   onTap: () {
@@ -154,6 +150,14 @@ class _MyLoginPageState extends State<MyLoginPage> {
                     height: 36,
                     width: 36,
                   ),
+                ),
+                IconButton(
+                  onPressed: () => Navigator.of(context).pushNamed("phone"),
+                  icon: Icon(Icons.phone_android_rounded, size: 35),
+                ),
+                IconButton(
+                  onPressed: () => FirebaseMethods().anonymousSignIn(context),
+                  icon: Icon(Icons.person, size: 35),
                 ),
               ],
             ),

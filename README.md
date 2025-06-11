@@ -2,7 +2,7 @@
 
 A simple Flutter application demonstrating Firebase Authentication integration with multiple sign-in methods.
 
-## ✨ Features
+## Features ✨
 
 - 🔑 Email & Password Authentication
 - 📞 Phone Number Authentication
@@ -13,7 +13,7 @@ A simple Flutter application demonstrating Firebase Authentication integration w
 - 📝 Login / Signup Screens
 - ✅ Auth State Persistence
 
-## 📸 Screenshots
+## Screenshots 📸
 
 ### **Firebase Sign In Providers**
 > Firebase console configuration showing the enabled authentication providers used in the app (Email/Password, Phone, Google, Anonymous).
@@ -65,6 +65,17 @@ A simple Flutter application demonstrating Firebase Authentication integration w
 <img src="screenshots/google3.png"/>
 <p>
 
+### **Resetting Password**
+> Screens demonstrating the password reset flow. Users can enter their registered email address to receive a reset link. After clicking the link from their inbox, they are directed to a page where they can set a new password and regain access to their account.
+<p>
+<img src="screenshots/forgot1.png" width="300"/>
+<img src="screenshots/forgot2.png" width="300"/>
+<img src="screenshots/forgot3.png" width="300"/>
+<img src="screenshots/forgot4.png"/>
+<img src="screenshots/forgot5.png"/>
+<img src="screenshots/forgot6.png"/>
+<p>
+
 ## Dependencies ⚙️
 This project uses the following dependencies:
 
@@ -73,7 +84,7 @@ This project uses the following dependencies:
 - [`google_sign_in`](https://pub.dev/packages/google_sign_in): Enables Google Sign-In authentication.
 - [`flutter_dotenv`](https://pub.dev/packages/flutter_dotenv): Used to load environment variables from a `.env` file.
 
-## 🛠️ Getting Started
+## Getting Started 🛠️
 
 ### Prerequisites
 
@@ -81,7 +92,7 @@ This project uses the following dependencies:
 - Dart SDK
 - Firebase project setup
 
-### Firebase Setup
+### Firebase Setup 🔧 
 
 1. Create a Firebase project at [https://console.firebase.google.com](https://console.firebase.google.com)
 2. Add an Android/iOS app to the project.
@@ -92,7 +103,7 @@ This project uses the following dependencies:
    - Google
    - Anonymous
 
-### Installation
+### Installation 📦
 
 Clone the repository and run the following commands:
 
@@ -113,5 +124,5 @@ flutter run
 - **VS Code / Android Studio**: IDEs used for Flutter development.
 - **Git**: Version control system for tracking changes in source code.
 
-## 📄 License
+## License 📄
 This project is licensed under the [MIT License](LICENSE).

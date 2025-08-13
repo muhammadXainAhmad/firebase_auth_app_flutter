@@ -3,7 +3,6 @@
 A simple Flutter application demonstrating Firebase Authentication integration with multiple sign-in methods.
 
 ## Features ✨
-
 - 🔑 Email & Password Authentication
 - 📞 Phone Number Authentication
 - 🟢 Google Sign-In
